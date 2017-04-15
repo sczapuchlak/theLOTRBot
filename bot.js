@@ -2,27 +2,53 @@
 // list of different parameters through twitter https://dev.twitter.com/rest/reference/get/search/tweets
 //https://dev.twitter.com/rest/public/search
 //I found out how to query the api and the operators on this site. EXTREMELY helpful!
-
-
-
-
-
-
 var twit = require('twit');
 var config = require('./config.js');
 
 var Twitter = new twit(config);
+
+/*
+var app = express();
+// Changes the extension name for handlebars.
+app.engine('.hbs',
+    exp_hbs({ extname:'.hbs',
+        defaultLayout: 'main'
+    }));
+
+app.set('view engine', '.hbs');
+
+app.use(express.static(path.join(__dirname, 'static')));
+
+// Sets up home and about pages.
+app.use('/', routes);
+app.use('/about', about);
+
+// Tells program which port to listen to on local machine.
+app.listen(process.env.PORT || 3000, function(){
+    console.log('Currency app running on port 3000');
+});
+// Exports program.
+module.exports = app;
+
+*/
+
+
+
+
+
+
 
 //the retweet function retweets certain parameters that i set in the q(query)
 var retweet = function() {
     var params = {
        //if i want to do just pictures q: '#lotr filter:media',
         //taking multiple arguments, to switch up what is displayed
-        q: '@LOTRReactss OR #lotr filter:media OR #LordOfTheRingsMeme OR #lordoftheringsmeme',
+        //@LOTRReactss OR #lotr filter:media OR #lordoftheringsmeme #LordOfTheRingsMeme'
+        q: '#lotr filter:media',
        //searches for recent and popular tweets
         //could have result_type be popular
         //could have result type be recent
-        result_type: 'mixed',
+        result_type: 'popular',
         //what the language i'm querying for
         lang: 'en'
     };
