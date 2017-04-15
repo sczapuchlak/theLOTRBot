@@ -11,8 +11,8 @@ var Twitter = new twit(config);
 var retweet = function() {
     var params = {
        //if i want to do just pictures q: '#lotr filter:media',
-
-        q: '#lotr filter:media',
+        //taking multiple arguments, to switch up what is displayed
+        q: '@LOTRReactss OR #lotr filter:media OR #LordOfTheRingsMeme OR #lordoftheringsmeme',
        //searches for recent and popular tweets
         //could have result_type be popular
         //could have result type be recent
