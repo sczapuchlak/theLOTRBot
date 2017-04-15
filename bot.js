@@ -2,6 +2,12 @@
 // list of different parameters through twitter https://dev.twitter.com/rest/reference/get/search/tweets
 //https://dev.twitter.com/rest/public/search
 //I found out how to query the api and the operators on this site. EXTREMELY helpful!
+
+
+
+
+
+
 var twit = require('twit');
 var config = require('./config.js');
 

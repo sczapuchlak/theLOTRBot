@@ -1,0 +1,9 @@
+body{
+    text-align: center;
+    background: linear-gradient( 90deg, cyan,aqua, midnightblue, black );;
+    font-family: sans-serif;
+}
+
+input, button, select{
+    margin: 5px;
+}
