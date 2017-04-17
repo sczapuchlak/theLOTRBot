@@ -14,11 +14,11 @@ var retweet = function() {
        //if i want to do just pictures q: '#lotr filter:media',
         //taking multiple arguments, to switch up what is displayed
         //@LOTRReactss OR #lotr filter:media OR #LordOfTheRingsMeme OR #lordoftheringsmeme
-        q: 'lotr OR @LOTRReactss OR lotr filter:media OR #LordOfTheRingsMeme OR #lordoftheringsmeme',
+        q: 'lotr',
        //searches for recent and popular tweets
         //could have result_type be popular
         //could have result type be recent
-        result_type: 'mixed' ,
+        result_type: 'mixed',
         //what the language i'm querying for
         lang: 'en'
     };
@@ -53,7 +53,7 @@ var retweet = function() {
 // grab & retweet as soon as program is running...
 retweet();
 // retweet every hour to ensure there is enough content
-setInterval(retweet, 3600);
+setInterval(retweet, 3600000);
 
 // this next section will run the favorite part of the bot, where the bot wil go
 //through and favorite random tweets to whatever query I want.
@@ -62,7 +62,7 @@ setInterval(retweet, 3600);
 // find a random tweet and 'favorite' it
 var favoriteTweet = function(){
     var params = {
-        q: 'lotr OR @LOTRReactss OR lotr filter:media OR #LordOfTheRingsMeme OR #lordoftheringsmeme',  // REQUIRED
+        q: '#lotr',  // REQUIRED
         result_type: 'mixed',
         lang: 'en'
     }
@@ -91,7 +91,7 @@ var favoriteTweet = function(){
 // grab & 'favorite' as soon as program is running...
 favoriteTweet();
 // 'favorite' a tweet once every hour
-setInterval(favoriteTweet, 3600);
+setInterval(favoriteTweet, 3600000);
 
 // function to generate a random tweet tweet
 function randomize (arr) {
