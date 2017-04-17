@@ -98,3 +98,20 @@ function randomize (arr) {
     var index = Math.floor(Math.random()*arr.length);
     return arr[index];
 }
+
+// this section is for tweeting random phrases so it doesn't just look i retweet and favorite!
+var phraseArray = [ "YOU SHALL NOT PASS!",
+    "Sauron: You can not hide, I see you! There is no life, after me. Only!.. Death!",
+    "Frodo Baggins: I think we should get off the road. Get off the road! Quick!",
+    "Gandalf: Fly you fools!",
+    "Queen Galadriel: May it be your light in the darkness; when all other lights go out.",
+    "Legolas: We must move on, we cannot linger.",
+    "Gimli: Nobody tosses a Dwarf!",
+    "Bilbo Baggins: Gandalf, my old friend, this will be a night to remember.",
+    "Queen Galadriel: Even the smallest person can change the course of the future.",
+    "Gandalf: All you have to decide is what to do with the time that is given to you." ];
+function chooseRandom(myArray) {
+    return myArray[Math.floor(Math.random() * myArray.length)];
+}
+var phrase = chooseRandom(phraseArray) + ", " + chooseRandom(phraseArray);
+Bot.tweet(phrase);
