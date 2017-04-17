@@ -51,7 +51,7 @@ var retweet = function() {
 // grab & 'favorite' as soon as program is running...
 retweet();
 // 'favorite' a tweet once every hour
-setInterval(retweet, 3600);
+setInterval(retweet, 3600000);
 
 // this function was erroring more than it worked. Keep this commented out.
   /*  //using the Twitter get
@@ -128,7 +128,7 @@ var favoriteTweet = function(){
 // grab & 'favorite' as soon as program is running...
 favoriteTweet();
 // 'favorite' a tweet once every hour
-setInterval(favoriteTweet, 3600);
+setInterval(favoriteTweet, 3600000);
 
 
 
