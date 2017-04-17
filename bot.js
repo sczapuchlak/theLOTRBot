@@ -53,7 +53,7 @@ var retweet = function() {
 // grab & retweet as soon as program is running...
 retweet();
 // retweet every hour to ensure there is enough content
-setInterval(retweet, 3600000);
+setInterval(retweet, 3600);
 
 // this next section will run the favorite part of the bot, where the bot wil go
 //through and favorite random tweets to whatever query I want.
@@ -91,7 +91,7 @@ var favoriteTweet = function(){
 // grab & 'favorite' as soon as program is running...
 favoriteTweet();
 // 'favorite' a tweet once every hour
-setInterval(favoriteTweet, 3600000);
+setInterval(favoriteTweet, 3600);
 
 // function to generate a random tweet tweet
 function randomize (arr) {
