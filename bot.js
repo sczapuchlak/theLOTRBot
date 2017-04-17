@@ -18,7 +18,7 @@ var retweet = function() {
        //searches for recent and popular tweets
         //could have result_type be popular
         //could have result type be recent
-        result_type: 'recent' ,
+        result_type: 'popular' ,
         //what the language i'm querying for
         lang: 'en'
     };
