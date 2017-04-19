@@ -26,7 +26,7 @@ var client = new TwitterAPI({
     access_token_key:TWITTER_ACCESS_TOKEN_KEY,
     access_token_secret:TWITTER_ACCESS_TOKEN_SECRET
 });
-
+//THIS IS THE RETWEET SECTION!
 
 //the retweet function retweets certain parameters that i set in the q(query)
 var retweet = function() {
@@ -56,7 +56,7 @@ var retweet = function() {
         // if random tweet exists
         if(typeof randomTweet != 'undefined'){
             // Tell TWITTER to retweet
-            Twitter.post('statuses/retweet/:id', {id: randomTweet.id_str}, function(err, response){
+            Twitter.post('statuses/retweet/:id', {id: randomTweet.id_str}, function(err){
                 // if there was an error while 'favorite'
                 if(err){
                     console.log('You have already retweeted this post! #facePalm');
@@ -70,10 +70,16 @@ var retweet = function() {
 };
 
 
-// grab & 'favorite' as soon as program is running...
+// grab & retweet as soon as program is running...
 retweet();
-// 'favorite' a tweet once every hour
+// retweet a tweet once every hour
 setInterval(retweet, 3600000);
+
+
+
+//THIS IS THE FAVORITING SECTION!
+
+
 
 
 // find a random tweet and 'favorite' it
@@ -100,7 +106,7 @@ var favoriteTweet = function(){
         // if random tweet exists
         if(typeof randomTweet != 'undefined'){
             // Tell TWITTER to 'favorite'
-            Twitter.post('favorites/create', {id: randomTweet.id_str}, function(err, response){
+            Twitter.post('favorites/create', {id: randomTweet.id_str}, function(err){
                 // if there was an error while 'favorite'
                 if(err){
                     console.log('You have already favorited this post! #facePalm');
@@ -117,63 +123,147 @@ favoriteTweet();
 // 'favorite' a tweet once every hour
 setInterval(favoriteTweet, 3600000);
 
+
+
+
+
+//THIS IS THE GIF GRABBING SECTION FROM GIPHY
+
+
+
+var getGifAndTweet = function() {
 //this will tweet a gif to a user
-getGif('lotr');  // Change to another subject of your choice
+    getGif('lotr');  // this is the subject matter that will be the query for giphy
 
-function getGif(subject){
+    function getGif(subject) {
 
-    var filename = subject + '.gif';   // Todo error handling. Make sure subject text is a valid filename.
-    //had to add the tag into the end of the url, for someone reason it wasnt working when I was concatenating
-    // it at the end
-    var url = 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=lotr' ;
+        var filename = subject + '.gif';   // Todo error handling. Make sure subject text is a valid filename.
+        //had to add the tag into the end of the url, for someone reason it wasnt working when I was concatenating
+        // it at the end
+        var url = 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=lotr';
 
-    request(url, q = { 'tag' : subject },  function(error, response, body){
-        if (!error && response.statusCode == 200) {
+        request(url, q = {'tag': subject}, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
 
-            var resp = JSON.parse(body);
-            var gifUrl = resp.data.image_url;
+                var resp = JSON.parse(body);
+                var gifUrl = resp.data.image_url;
 
-            //Download picture, save
-            var filestream = request.get(gifUrl);
-            filestream.pipe(fs.createWriteStream(filename));
+                //Download picture, save
+                var filestream = request.get(gifUrl);
+                filestream.pipe(fs.createWriteStream(filename));
 
-            // And once saved, use to create tweet.
-            filestream.on('end', function(){
-                tweet_gif(filename, subject);
+                // And once saved, use to create tweet.
+                filestream.on('end', function () {
+                    tweet_gif(filename, subject);
+
+                });
+
+            } else {
+                console.log('Error getting gif', error, response.statusCode);
+            }
+        });
+    }
+
+
+// THIS SECTION WILL TWEET THE GIF THAT WAS FOUND IN THE SECTION ABOVE
+
+
+    function tweet_gif(filename, subject) {
+
+        var gif = fs.readFileSync(filename);
+        var status_text = 'Lord of the Rings >> Everything Else';
+
+        client.post('media/upload', {media: gif}, function (err, media) {
+            if (err) {
+                console.log('Error uploading media', err);
+            }
+            else {
+
+                var tweet = {status: status_text, media_ids: media.media_id_string};
+
+                console.log(media);
+                client.post('statuses/update', tweet, function (error, tweet) {
+                    if (error) {
+                        console.log('Error posting tweet', error);
+                    }
+                    else {
+                        console.log("Posted this tweet", status_text);
+                    }
+                });
+            }
+        });
+    };
+}
+getGifAndTweet();
+setInterval(getGifAndTweet,3600000);
+
+    // grab tweet as soon as program is running...
+//tweet_gif();
+
+// tweet a gif every hour!
+//setInterval(tweet_gif, 360000);
+
+
+// THIS SECTION SEARCHES THROUGH TWITTER STREAMS AND FINDS PEOPLE TALKING ABOUT LOTR AND TWEETS THEM A REPONSE
+//FROM THE ARRAY OF LOTR QUOTES
+
+//in the future this will also tweet the meme to them as well
+
+
+// Call the stream function and pass in 'statuses/filter', our filter object, and our callback
+
+var tweetRandomUser = function() {
+    client.stream('statuses/filter', {track: '#lotr'}, function (stream) {
+
+        var phraseArray = ["YOU SHALL NOT PASS!",
+            "Sauron: You can not hide, I see you! There is no life, after me. Only!.. Death!",
+            "Frodo Baggins: I think we should get off the road. Get off the road! Quick!",
+            "Gandalf: Fly you fools!",
+            "Queen Galadriel: May it be your light in the darkness; when all other lights go out.",
+            "Legolas: We must move on, we cannot linger.",
+            "Gimli: Nobody tosses a Dwarf!",
+            "Bilbo Baggins: Gandalf, my old friend, this will be a night to remember.",
+            "Queen Galadriel: Even the smallest person can change the course of the future.",
+            "Gandalf: All you have to decide is what to do with the time that is given to you."]
+
+
+        // ... when we get tweet data...
+        stream.on('data', function (tweet) {
+
+            // print out the text of the tweet that came in
+            console.log(tweet.text);
+
+            // calculate the random index (Math.random returns a double between 0 and 1)
+            var randomIndex = Math.round(Math.random() * phraseArray.length);
+
+
+            //build our reply string grabbing the string in that randomIndex we've calculated
+            var statusObj = {status: "Hi @" + tweet.user.screen_name + ", " + phraseArray[randomIndex]};
+
+            //call the post function to tweet something
+            client.post('statuses/update', statusObj, function (error, tweetReply) {
+
+                //if we get an error print it out
+                if (error) {
+                    console.log(error);
+                }
+
+                //print the text of the tweet we sent out
+                console.log(tweetReply.text);
             });
+        });
 
-        } else {
-            console.log('Error getting gif', error, response.statusCode);
-        }
+        // ... when we get an error...
+        stream.on('error', function (error) {
+            //print out the error
+            console.log(error);
+        });
     });
 }
+//call the function when the program starts up
+tweetRandomUser();
+// set the interval timer to send tweets every hour
+setInterval(tweetRandomUser,3600000);
 
-function tweet_gif(filename, subject) {
 
-    var gif = fs.readFileSync(filename);
-    var status_text = 'Lord of the Rings >> Everything Else';
-
-    client.post('media/upload', { media:gif }, function(err, media, response){
-        if (err) {
-            console.log('Error uploading media', err);
-        }
-        else {
-
-            var tweet = { status : status_text, media_ids : media.media_id_string };
-
-            console.log(media);
-            client.post('statuses/update', tweet, function(error, tweet, response){
-                if (error) {
-                    console.log('Error posting tweet' , error);
-                }
-                else {
-                    console.log("Posted this tweet", status_text);
-                }
-            });
-        }
-    });}
-// grab tweet as soon as program is running...
-//tweet_gif();
-// tweet a gif every hour!
-setInterval(tweet_gif, 360000);
 
