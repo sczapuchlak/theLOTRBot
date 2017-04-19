@@ -1,0 +1,102 @@
+
+ /*   client.post('media/upload', { media:gif }, function(err, media, response){
+     if (err) {
+     console.log('Error uploading media', err);
+     }
+     else {
+
+     var tweet = { status : status_text, media_ids : media.media_id_string };
+
+     console.log(media);
+     client.post('statuses/update', tweet, function(error, tweet, response){
+     if (error) {
+     console.log('Error posting tweet' , error);
+     }
+     else {
+     console.log("Posted this tweet", status_text);
+     }
+     });
+     }
+     });*/
+//start with this to find a gif for gollum and ring.
+/*var searchForGif = function() {
+ giphy.search('gollum', function (err, data) {
+ if (err) {
+ console.log(err);
+ return;
+ }
+ var gifs = data.data;
+ var gif = gifs[Math.floor(Math.random() * gifs.length)];
+ console.log(gif)
+ });
+ };
+ searchForGif();*/
+/*rapid.call('Giphy', 'getRandomGif', {
+ 'apiKey': 'dc6zaTOxFJmzC',
+ 'tag': 'gollum AND ring',
+ 'rating': ''
+ }).on('success', (payload)
+ )*/
+
+
+
+
+// this section is for tweeting random phrases so it doesn't just look i retweet and favorite!
+/*
+ var tweetPhrase = function(){
+ var phraseArray = [ "YOU SHALL NOT PASS!",
+ "Sauron: You can not hide, I see you! There is no life, after me. Only!.. Death!",
+ "Frodo Baggins: I think we should get off the road. Get off the road! Quick!",
+ "Gandalf: Fly you fools!",
+ "Queen Galadriel: May it be your light in the darkness; when all other lights go out.",
+ "Legolas: We must move on, we cannot linger.",
+ "Gimli: Nobody tosses a Dwarf!",
+ "Bilbo Baggins: Gandalf, my old friend, this will be a night to remember.",
+ "Queen Galadriel: Even the smallest person can change the course of the future.",
+ "Gandalf: All you have to decide is what to do with the time that is given to you." ];
+ function chooseRandom(myArray) {
+ return myArray[Math.floor(Math.random() * myArray.length)];
+ }
+ var phrase = chooseRandom(phraseArray) + ", " + chooseRandom(phraseArray);
+ console.log("You have tweeted a phrase! #yasssqueen")
+ tweetPhrase(phrase);}*/
+
+//this is the function that calls the RapidAPI to get the memes
+
+
+
+// this function was erroring more than it worked. Keep this commented out.
+/*  //using the Twitter get
+ Twitter.get('search/tweets', params, function(err, data) {
+ // if there no errors
+ if (!err) {
+ // grab ID of tweet to retweet
+ var retweetId = data.statuses[1].id_str;
+ // Tell TWITTER to retweet
+ //using the Twitter post method, to post the API endpoint (the URL).
+ Twitter.post('statuses/retweet/:id', {
+ id: retweetId
+ }, function(err, response) {
+ if (response) {
+ console.log('You have retweeted a tweet! # goYou!');
+ }
+ // if there was an error while tweeting
+ if (err) {
+ console.log('For some reason you can not retweet this tweet #facePalm');
+ }
+ });
+ }
+ // if unable to Search a tweet
+ else {
+ console.log('There was an error while searching');
+ }
+ });
+ };
+ // grab & retweet as soon as program is running...
+ retweet();
+ // retweet every hour to ensure there is enough content
+ setInterval(retweet, 3600000);*/
+
+// this next section will run the favorite part of the bot, where the bot wil go
+//through and favorite random tweets to whatever query I want.
+

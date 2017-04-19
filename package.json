@@ -12,10 +12,15 @@
     "debug": "~2.6.0",
     "express": "~4.14.1",
     "express-handlebars": "^3.0.0",
+    "fs": "0.0.1-security",
+    "giphy-api": "^1.2.5",
     "hbs": "~4.0.1",
     "morgan": "~1.7.0",
     "node-twitterbot": "^0.2.2",
+    "rapidapi-connect": "0.0.4",
+    "request": "^2.81.0",
     "serve-favicon": "~2.3.2",
-    "twit": "^2.2.5"
+    "twit": "^2.2.5",
+    "twitter": "^1.7.0"
   }
 }
