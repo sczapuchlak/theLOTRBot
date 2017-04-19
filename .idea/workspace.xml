@@ -25,8 +25,8 @@
       <file leaf-file-name="bot.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bot.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1091">
-              <caret line="197" column="34" lean-forward="false" selection-start-line="197" selection-start-column="34" selection-end-line="197" selection-end-column="34" />
+            <state relative-caret-position="343">
+              <caret line="260" column="35" lean-forward="true" selection-start-line="260" selection-start-column="28" selection-end-line="260" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -259,7 +259,7 @@
       <workItem from="1492225605949" duration="7788000" />
       <workItem from="1492274475129" duration="19868000" />
       <workItem from="1492558028185" duration="430000" />
-      <workItem from="1492558491678" duration="12213000" />
+      <workItem from="1492558491678" duration="13478000" />
     </task>
     <task id="LOCAL-00001" summary="Have retweeting working">
       <created>1492231691896</created>
@@ -366,11 +366,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492622548754</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Got all the time intervals working and it now tweets to users who mention LOTR :)">
+      <created>1492628209432</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1492628209432</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40299000" />
+    <option name="totallyTimeSpent" value="41564000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -417,7 +424,9 @@
     <MESSAGE value="changed queries" />
     <MESSAGE value="fixed the retweet function to look more like the favorite function. Definitely works better" />
     <MESSAGE value="Can now tweet random memes from giphy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can now tweet random memes from giphy" />
+    <MESSAGE value="Got all the time intervals working and it now tweets to users who mention LOTR" />
+    <MESSAGE value="Got all the time intervals working and it now tweets to users who mention LOTR :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got all the time intervals working and it now tweets to users who mention LOTR :)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -642,8 +651,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bot.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1091">
-          <caret line="197" column="34" lean-forward="false" selection-start-line="197" selection-start-column="34" selection-end-line="197" selection-end-column="34" />
+        <state relative-caret-position="343">
+          <caret line="260" column="35" lean-forward="true" selection-start-line="260" selection-start-column="28" selection-end-line="260" selection-end-column="35" />
           <folding />
         </state>
       </provider>

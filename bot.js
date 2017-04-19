@@ -193,15 +193,10 @@ var getGifAndTweet = function() {
             }
         });
     };
-}
+};
 getGifAndTweet();
 setInterval(getGifAndTweet,3600000);
 
-    // grab tweet as soon as program is running...
-//tweet_gif();
-
-// tweet a gif every hour!
-//setInterval(tweet_gif, 360000);
 
 
 // THIS SECTION SEARCHES THROUGH TWITTER STREAMS AND FINDS PEOPLE TALKING ABOUT LOTR AND TWEETS THEM A REPONSE
@@ -259,11 +254,11 @@ var tweetRandomUser = function() {
             console.log(error);
         });
     });
-}
+};
 //call the function when the program starts up
 tweetRandomUser();
-// set the interval timer to send tweets every hour
-setInterval(tweetRandomUser,3600000);
+// set the interval timer to send tweets every two hours
+setInterval(tweetRandomUser,7600000);
 
 
 
