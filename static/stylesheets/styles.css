@@ -1,0 +1,10 @@
+
+body{
+    text-align: center;
+    background: linear-gradient( to right,aqua, midnightblue, black );;
+    font-family: sans-serif;
+    color: greenyellow;
+}
+.link {
+    color: yellow;
+}

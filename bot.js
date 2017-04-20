@@ -192,7 +192,7 @@ var getGifAndTweet = function() {
                 });
             }
         });
-    };
+    }
 };
 getGifAndTweet();
 setInterval(getGifAndTweet,3600000);
@@ -258,7 +258,33 @@ var tweetRandomUser = function() {
 //call the function when the program starts up
 tweetRandomUser();
 // set the interval timer to send tweets every two hours
-setInterval(tweetRandomUser,7600000);
+setInterval(tweetRandomUser,760000000);
 
 
+/// just put the routes in this js just to be sure it worked
+
+var express = require('express');
+var exp_hbs = require('express-handlebars');
+//var path = require('path');
+var routes = require('./routes/index');
+var path =  require('path')
+
+
+var app = express();
+// Changes the extension name for handlebars.
+app.engine('.hbs', exp_hbs({ extname:'.hbs'}));
+app.set('view engine', '.hbs');
+
+app.use(express.static(path.join(__dirname, 'static')))
+
+// Sets up home and about pages.
+app.use('/', routes);
+/*app.use('/about', about);*/
+
+// Tells program which port to listen to on local machine.
+app.listen(process.env.PORT || 3000, function(){
+    console.log('Currency app running on port 3000');
+});
+// Exports program.
+module.exports = app;
 
