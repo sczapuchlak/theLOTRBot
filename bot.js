@@ -15,10 +15,10 @@ var fs = require('fs');   // File system
 
 var Twitter = new twit(config);
 
-TWITTER_CONSUMER_KEY='Qf7vVTlrOzQozykpwYT1GCl4h';
-TWITTER_CONSUMER_SECRET='l1R07K8BBGA04LImrr4VSPgEbwZ1w3SD4Px65OgGFDwvzvuRFL';
-TWITTER_ACCESS_TOKEN_KEY='852622538219954176-zEAEj6o4pH0rdffWjcRaCL09EX1D2Mo';
-TWITTER_ACCESS_TOKEN_SECRET='h5W8G6gAVXJmCysbmQq0bEpgJUV3uV5H0pZADk2y907QU';
+TWITTER_CONSUMER_KEY='WvMaCSaQPq9h8FIUfeCqCqBFX';
+TWITTER_CONSUMER_SECRET='kQtbEweNKRgxGbzzb0Viwl0mN4XmMeyLJAKWdRkUFCTOEqmWrc';
+TWITTER_ACCESS_TOKEN_KEY='856947520915877889-yOqdWkoDUrSGFjqY3hlU185kqMdFeji';
+TWITTER_ACCESS_TOKEN_SECRET='IczQpE1VPsAC8e4UhKcY030SdRBrwOzhr7DwfRtOqy6yV';
 
 var client = new TwitterAPI({
     consumer_key:TWITTER_CONSUMER_KEY,
@@ -43,20 +43,21 @@ var retweet = function() {
         lang: 'en'
     };
     // function to generate a random tweet
-    function randomize (arr) {
+    /*function randomize (arr) {
+
         var index = Math.floor(Math.random()*arr.length);
+        console.log(arr.index);
         return arr[index];
-    }
+    }*/
     Twitter.get('search/tweets', params, function(err,data){
 
-        // find tweets
-        var tweet = data.statuses;
-        var randomTweet = randomize(tweet);   // pick a random tweet
-
-        // if random tweet exists
-        if(typeof randomTweet != 'undefined'){
+      //if no errors
+        if (!err){
+            //grab ID of tweet to retweet
+            var retweetID = data.statuses[0].id_str;
+            // if random tweet exists
             // Tell TWITTER to retweet
-            Twitter.post('statuses/retweet/:id', {id: randomTweet.id_str}, function(err){
+            Twitter.post('statuses/retweet/:id', {id: retweetID}, function(err){
                 // if there was an error while 'favorite'
                 if(err){
                     console.log('You have already retweeted this post! #facePalm');
@@ -64,7 +65,11 @@ var retweet = function() {
                 else{
                     console.log('You have retweeted a tweet! #goYou!');
                 }
+
             });
+        }
+        else {
+            console.log("Something went wrong while searching!")
         }
     });
 };
@@ -91,22 +96,36 @@ var favoriteTweet = function(){
     };
     // find the tweet
 
-
-    // function to generate a random tweet
-    function randomize (arr) {
-        var index = Math.floor(Math.random()*arr.length);
-        return arr[index];
-    }
     Twitter.get('search/tweets', params, function(err,data){
 
-        // find tweets
-        var tweet = data.statuses;
-        var randomTweet = randomize(tweet);   // pick a random tweet
+        //if no errors
+        if (!err){
+            //grab ID of tweet to favorite
+            var favoriteID = data.statuses[0].id_str;
+            // if random tweet exists
+            // Tell TWITTER to favorite
+            Twitter.post('favorites/create', {id: favoriteID}, function(err){
+                // if there was an error while 'favorite'
+                if(err){
+                    console.log('You have already favorited this post! #facePalm');
+                }
+                else{
+                    console.log('You have favorited a tweet! #goYou!');
+                }
 
+            });
+        }
+        else {
+            console.log("Something went wrong while searching!")
+        }
+    });
+   /*
+        //grab ID of tweet to favorite
+        var favoriteID = data.statuses[0].id_str;
         // if random tweet exists
         if(typeof randomTweet != 'undefined'){
             // Tell TWITTER to 'favorite'
-            Twitter.post('favorites/create', {id: randomTweet.id_str}, function(err){
+            Twitter.post('favorites/create', {id: favoriteID},function(err){
                 // if there was an error while 'favorite'
                 if(err){
                     console.log('You have already favorited this post! #facePalm');
@@ -116,13 +135,12 @@ var favoriteTweet = function(){
                 }
             });
         }
-    });
-};
+    });*/
+}
 // grab & 'favorite' as soon as program is running...
 favoriteTweet();
 // 'favorite' a tweet once every hour
-setInterval(favoriteTweet, 3600000);
-
+//setInterval(favoriteTweet, 3600000);
 
 
 
@@ -195,7 +213,7 @@ var getGifAndTweet = function() {
     }
 };
 getGifAndTweet();
-setInterval(getGifAndTweet,3600000);
+//setInterval(getGifAndTweet,3600000);
 
 
 
@@ -208,7 +226,7 @@ setInterval(getGifAndTweet,3600000);
 // Call the stream function and pass in 'statuses/filter', our filter object, and our callback
 
 var tweetRandomUser = function() {
-    client.stream('statuses/filter', {track: '#lotr'}, function (stream) {
+    client.stream('statuses/filter', {track: '#lordoftherings'}, function (stream) {
 
         var phraseArray = ["YOU SHALL NOT PASS!",
             "Sauron: You can not hide, I see you! There is no life, after me. Only!.. Death!",
@@ -258,7 +276,7 @@ var tweetRandomUser = function() {
 //call the function when the program starts up
 tweetRandomUser();
 // set the interval timer to send tweets every two hours
-setInterval(tweetRandomUser,760000000);
+//setInterval(tweetRandomUser,760000000);
 
 
 /// just put the routes in this js just to be sure it worked
@@ -267,7 +285,7 @@ var express = require('express');
 var exp_hbs = require('express-handlebars');
 //var path = require('path');
 var routes = require('./routes/index');
-var path =  require('path')
+var path =  require('path');
 
 
 var app = express();
