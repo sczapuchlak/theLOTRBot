@@ -38,7 +38,7 @@ var retweet = function() {
        //searches for recent and popular tweets
         //could have result_type be popular
         //could have result type be recent
-        result_type: 'mixed',
+        result_type: 'recent',
         //what the language i'm querying for
         lang: 'en'
     };
@@ -78,7 +78,7 @@ var retweet = function() {
 // grab & retweet as soon as program is running...
 retweet();
 // retweet a tweet once every hour
-setInterval(retweet, 3600000);
+//setInterval(retweet, 3600000);
 
 
 
@@ -274,7 +274,7 @@ var tweetRandomUser = function() {
     });
 };
 //call the function when the program starts up
-tweetRandomUser();
+//tweetRandomUser();
 // set the interval timer to send tweets every two hours
 //setInterval(tweetRandomUser,760000000);
 
